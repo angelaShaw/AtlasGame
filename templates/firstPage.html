@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </script>
+<body>
+<center>
+      <dl>
+                    <div class="jumbotron">
+                            <h1>ATLAS<img src="{{ url_for('static', filename='globgif.gif') }}" class="img-rounded" alt="Cinque Terre" width="50" height="50"></h1>
+                    </div>
+          <div class="container">
+</div>
+</script>
+    <meta charset="UTF-8">
+    <title>ATLAS</title>
+    <ul>
+        <font class=comments><br>{{myX}}</font>
+        <font class=comments><br> HOW TO PLAY:</font>
+        <font class=comments><br>Both human and computer start with 3 points</font>
+        <font class=comments><br>For each wrong country typed (i.e. not a real country, already stated, or does not start with the right letter) the player loses a point</font>
+        <font class=comments><br>Who ever reaches 0 points first loses, and the other player wins</font>
+        <font class=comments><br>The computer starts first with the letter A</font>
+        <font class=comments><br>When you first start type in your name, the computer will start afterwards and then you can began</font>
+        <font class=comments><br>GOOD LUCK!<br></font>
+        <a href="{{ url_for('test') }}" ><button type="button" class="btn btn-primary" >Start Game</button></a>
+
+    </ul>
+</head>
+<body>
+<div class="container">
+  <h2>RANKINGS</h2>
+<table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="success">
+        <td>{{names[0]}}</td>
+        <td>{{times[0]}}</td>
+      </tr>
+      <tr class="info">
+        <td>{{names[1]}}</td>
+        <td>{{times[1]}}</td>
+      </tr>
+      <tr class="info">
+        <td>{{names[2]}}</td>
+        <td>{{times[2]}}</td>
+      </tr>
+      <tr class="info">
+        <td>{{names[3]}}</td>
+        <td>{{times[3]}}</td>
+      </tr>
+      <tr class="danger">
+        <td>{{names[4]}}</td>
+        <td>{{times[4]}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+</body>
+</html>

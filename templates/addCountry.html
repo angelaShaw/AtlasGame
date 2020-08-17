@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ATLAS</title>
+
+    <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='bootstrap.min.css') }}">
+<script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+<script lang="javascript">
+function fetchdata(){
+    $.ajax({
+            url: "http://localhost:5000/getActiveUser",
+            type: "GET",
+            contentType: "application/json"
+        }).done(function(data) {
+            console.log(data);
+            $("#activeUser").text(data.message)
+        });
+}
+    $("document").ready(function(){
+    setInterval(fetchdata,2000);
+    //add Event Handler
+    var input = document.getElementById("txtName");
+    input.addEventListener("keyup", function(event) {
+      //submit when enter key is press
+      if (event.keyCode === 13) {
+       event.preventDefault();
+       var message = $("#txtName").val();
+       $.ajax({
+            url: "http://localhost:5000/getCountry",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({"userInput": message}),
+            dataType: "json"
+       }).done(function(data) {
+            //alert(data.compValue)
+            var table = document.getElementById("myTableResult");
+            var row = table.insertRow(0);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            var cell5 = row.insertCell(4);
+            var cell6 = row.insertCell(5);
+            cell1.innerHTML = data.start;
+            cell2.innerHTML = data.end ;
+            cell3.innerHTML = data.compValue;
+            cell4.innerHTML = data.end2;
+            cell5.innerHTML = data.humanPoints;
+            cell6.innerHTML = data.compPoints;
+            $("#txtName").val("");
+            $('#txtName').attr('placeholder', data.end2);
+            if(data.humanPoints == '0' || data.compPoints == '0'){
+
+                $("#txtName").attr("disabled", "disabled");
+                var gameMsg = document.getElementById("gameMessage");
+                //gameMsg.classList.add("alert alert-danger");
+                gameMsg.innerHTML="<div class='alert alert-danger'><strong> Game Over !!</strong> <a href='http://localhost:5000/' > try again</a></div>"
+            }
+       });
+      }
+    });
+
+});
+</script>
+<body>
+<center>
+      <dl>
+                    <div class="jumbotron">
+                        <h1>ATLAS<img src="{{ url_for('static', filename='globgif.gif') }}" class="img-rounded" alt="Cinque Terre" width="50" height="50"></h1>
+                    </div>
+          <div class="container">
+</div>
+        <dd><input name=text rows=3 cols=40 id="txtName" ></input>
+      </dl>
+<div id="gameMessage" ></div>
+<table id="myTableResult" border="1" class=".table-hover">
+    <tr>
+        <th>Player's word</th>
+        <th>Computer's Start Char </th>
+        <th>Computer's Word</th>
+        <th>Human Start Char</th>
+         <th>Player's points </th>
+        <th>Computer's point </th>
+ </tr>
+</table>
+<iframe id="myWiki" name="myWiki" src=""  width=100% height=50% ></iframe>
+</center>
+<div>FOR BEST EXPERIENCE USE CHROME</div>
+<div id = "activeUser"></div>
+</body>
+</html>
